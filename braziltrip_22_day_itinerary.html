@@ -440,7 +440,7 @@
 
                 button.classList.add('active');
                 button.setAttribute('aria-pressed', 'true');
-                document.querySelector(`[data-day="${day}"]`).classList.add('active');
+                document.querySelector(`.day-content[data-day="${day}"]`).classList.add('active');
 
                 const progressPercentage = (day / dayButtons.length) * 100;
                 progressFill.style.width = `${progressPercentage.toFixed(2)}%`;
