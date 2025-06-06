@@ -91,8 +91,54 @@
             <a href="itinerary.html">Full Itinerary</a> | <a href="highlights.html">Trip Highlights</a>
         </p>
     </div>
-    <footer>
+
+  <footer>
         &copy; 2024 Brazil Trip Planner
     </footer>
+
+
+    <script>
+        const dayButtons = document.querySelectorAll('.day-btn');
+        const dayContents = document.querySelectorAll('.day-content');
+        const progressFill = document.getElementById('progressFill');
+        const totalDays = dayButtons.length;
+
+        dayButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const day = parseInt(button.getAttribute('data-day'), 10);
+                
+                // Remove active class from all buttons and contents
+                dayButtons.forEach(btn => btn.classList.remove('active'));
+                dayContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                button.classList.add('active');
+                document.querySelector(`[data-day="${day}"].day-content`).classList.add('active');
+                
+
+                // Update progress bar based on total number of days
+                const progressPercentage = (day / dayButtons.length) * 100;
+                progressFill.style.width = `${progressPercentage.toFixed(2)}%`;
+                
+                // Smooth scroll to top of content
+                document.querySelector('.day-content.active').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            });
+        });
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.activity').forEach(activity => {
+            activity.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 5px 20px rgba(102, 126, 234, 0.2)';
+            });
+            
+            activity.addEventListener('mouseleave', function() {
+                this.style.boxShadow = 'none';
+            });
+        });
+    </script>
+
 </body>
 </html>
