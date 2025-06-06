@@ -492,6 +492,7 @@
         const dayButtons = document.querySelectorAll('.day-btn');
         const dayContents = document.querySelectorAll('.day-content');
         const progressFill = document.getElementById('progressFill');
+        const totalDays = dayButtons.length;
 
         dayButtons.forEach(button => {
             button.addEventListener('click', () => {
@@ -506,7 +507,7 @@
                 document.querySelector(`[data-day="${day}"].day-content`).classList.add('active');
                 
                 // Update progress bar
-                const progressPercentage = (day / 6) * 100;
+                const progressPercentage = (day / totalDays) * 100;
                 progressFill.style.width = `${progressPercentage}%`;
                 
                 // Smooth scroll to top of content
