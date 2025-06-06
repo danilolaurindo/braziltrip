@@ -495,7 +495,7 @@
 
         dayButtons.forEach(button => {
             button.addEventListener('click', () => {
-                const day = button.getAttribute('data-day');
+                const day = parseInt(button.getAttribute('data-day'), 10);
                 
                 // Remove active class from all buttons and contents
                 dayButtons.forEach(btn => btn.classList.remove('active'));
@@ -505,9 +505,9 @@
                 button.classList.add('active');
                 document.querySelector(`[data-day="${day}"].day-content`).classList.add('active');
                 
-                // Update progress bar
-                const progressPercentage = (day / 6) * 100;
-                progressFill.style.width = `${progressPercentage}%`;
+                // Update progress bar based on total number of days
+                const progressPercentage = (day / dayButtons.length) * 100;
+                progressFill.style.width = `${progressPercentage.toFixed(2)}%`;
                 
                 // Smooth scroll to top of content
                 document.querySelector('.day-content.active').scrollIntoView({ 
