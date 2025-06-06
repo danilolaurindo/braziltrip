@@ -1,4 +1,5 @@
 # braziltrip
 
-A simple static webpage describing a six day trip to Brazil's hidden gem,
-Jericoacoara. Open `index.html` in your browser to explore the itinerary.
+This project contains a small static website outlining a six day journey along the Ceará coast of Brazil.
+
+Open `index.html` for an overview map, quick day-by-day links and highlight photos. The detailed schedule lives in `itinerary.html` and top activities can be found on `highlights.html`.

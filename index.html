@@ -3,530 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jericoacoara 6-Day Adventure</title>
+    <title>Brazil 6-Day Adventure</title>
     <style>
-        * {
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            line-height: 1.6;
+            background: #f5f5f5;
             color: #333;
         }
-
+        header, footer {
+            text-align: center;
+            padding: 20px;
+            background: #4caf50;
+            color: white;
+        }
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            max-width: 1000px;
+            margin: auto;
             padding: 20px;
         }
-
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            color: white;
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        .day-selector {
-            display: flex;
-            justify-content: center;
+        .itinerary-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+            margin-top: 20px;
         }
-
-        .day-btn {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 2px solid rgba(255,255,255,0.3);
-            padding: 12px 24px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-        }
-
-        .day-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .day-btn.active {
+        .itinerary-item {
             background: white;
-            color: #667eea;
-            border-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
-
-        .day-content {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            display: none;
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        .day-content.active {
+        .itinerary-item img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
             display: block;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .day-header {
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 15px;
-            margin-bottom: 25px;
-        }
-
-        .day-title {
-            font-size: 2rem;
-            color: #667eea;
-            margin-bottom: 5px;
-        }
-
-        .day-theme {
-            font-size: 1.1rem;
-            color: #666;
-            font-style: italic;
-        }
-
-        .activities {
-            display: grid;
-            gap: 20px;
-        }
-
-        .activity {
-            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
-            padding: 20px;
-            border-radius: 15px;
-            border-left: 5px solid #667eea;
-            transition: transform 0.3s ease;
-        }
-
-        .activity:hover {
-            transform: translateX(5px);
-        }
-
-        .activity-time {
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-        }
-
-        .activity-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .activity-description {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        .activity-tip {
-            background: rgba(102, 126, 234, 0.1);
+        .itinerary-item a {
+            display: block;
             padding: 10px;
-            border-radius: 8px;
-            font-style: italic;
-            color: #555;
-            margin-top: 10px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
         }
-
-        .weather-info {
-            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            text-align: center;
-            color: white;
-        }
-
-        .progress-bar {
-            background: rgba(255,255,255,0.2);
-            height: 8px;
-            border-radius: 4px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            background: white;
-            height: 100%;
-            border-radius: 4px;
-            transition: width 0.5s ease;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            color: white;
-            opacity: 0.8;
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .container { padding: 15px; }
-            .day-content { padding: 20px; }
-            .day-btn { padding: 10px 16px; font-size: 0.9rem; }
+        iframe {
+            width: 100%;
+            height: 450px;
+            border: 0;
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Welcome to the Ceará Coast</h1>
+        <p>Your six day journey from Fortaleza to Jericoacoara</p>
+    </header>
     <div class="container">
-        <header>
-            <h1>🏝️ Jericoacoara Adventure</h1>
-            <p class="subtitle">6 Days in Paradise • Brazil's Hidden Gem</p>
-        </header>
+        <h2>Explore the Route</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1596416.600481005!2d-39.24441781647346!3d-3.306979211179866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c10e35cf6a3a77%3A0x3c3a96389c9397b7!2sFortaleza%2C%20State%20of%20Cear%C3%A1!3m2!1d-3.732714!2d-38.527015!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x796d3c9865b3f55%3A0xa1fd608b46290899!2sIcara%C3%AD%20de%20Amontada%2C%20Amontada%20-%20CE!3m2!1d-2.8951128!2d-39.6071847!3m3!1m2!1s0x7eac083546a1bc9%3A0x3ebdb272a0f6f881!2sJericoacoara%2C%20Jijoca%20de%20Jericoacoara%20-%20CE!3m2!1d-2.7930995!2d-40.5124001!5e0!3m2!1sen!2sbr!4v1710000000000!5m2!1sen!2sbr" allowfullscreen loading="lazy"></iframe>
 
-        <div class="weather-info">
-            <h3>🌤️ Perfect Weather Awaits</h3>
-            <p>Year-round temperatures: 26-30°C (79-86°F) • Dry season: July-December</p>
-        </div>
-
-        <div class="day-selector">
-            <button class="day-btn active" data-day="1">Day 1</button>
-            <button class="day-btn" data-day="2">Day 2</button>
-            <button class="day-btn" data-day="3">Day 3</button>
-            <button class="day-btn" data-day="4">Day 4</button>
-            <button class="day-btn" data-day="5">Day 5</button>
-            <button class="day-btn" data-day="6">Day 6</button>
-        </div>
-
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill" style="width: 16.67%;"></div>
-        </div>
-
-        <!-- Day 1 -->
-        <div class="day-content active" data-day="1">
-            <div class="day-header">
-                <h2 class="day-title">Day 1: Arrival & First Impressions</h2>
-                <p class="day-theme">Getting settled in paradise</p>
+        <h2>6-Day Itinerary Overview</h2>
+        <div class="itinerary-overview">
+            <div class="itinerary-item">
+                <a href="itinerary.html#day1"><img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=400&q=60" alt="Fortaleza skyline">Day 1</a>
             </div>
-            <div class="activities">
-                <div class="activity">
-                    <div class="activity-time">Morning: 10:00 AM</div>
-                    <div class="activity-title">🚐 Arrival from Fortaleza</div>
-                    <div class="activity-description">
-                        Take the scenic 4x4 transfer from Fortaleza (4-5 hours) or fly to Jijoca de Jericoacoara and transfer by buggy. The journey through sand dunes is an adventure itself!
-                    </div>
-                    <div class="activity-tip">💡 Tip: Book your transfer in advance and bring sunscreen for the open-air ride.</div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Afternoon: 2:00 PM</div>
-                    <div class="activity-title">🏨 Check-in & Explore the Village</div>
-                    <div class="activity-description">
-                        Settle into your pousada and take a walking tour of Jericoacoara's charming sandy streets. No cars allowed - just horses, buggies, and your feet!
-                    </div>
-                    <div class="activity-tip">💡 Tip: The village center is small and walkable. Most pousadas are within 10 minutes of the beach.</div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Evening: 6:00 PM</div>
-                    <div class="activity-title">🌅 Sunset at Duna do Pôr do Sol</div>
-                    <div class="activity-description">
-                        Climb the famous sunset dune for your first magical Jericoacoara sunset. Join locals and travelers for this daily ritual with caipirinha in hand.
-                    </div>
-                    <div class="activity-tip">💡 Tip: Arrive 30 minutes early to secure a good spot and bring a light jacket for the evening breeze.</div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Night: 8:00 PM</div>
-                    <div class="activity-title">🍽️ Welcome Dinner</div>
-                    <div class="activity-description">
-                        Enjoy fresh seafood at one of the beachfront restaurants. Try the local specialty: grilled lobster with coconut rice.
-                    </div>
-                </div>
+            <div class="itinerary-item">
+                <a href="itinerary.html#day2"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=60" alt="Beach">Day 2</a>
+            </div>
+            <div class="itinerary-item">
+                <a href="itinerary.html#day3"><img src="https://images.unsplash.com/photo-1503481766315-82c975ad6061?auto=format&fit=crop&w=400&q=60" alt="Lagoon">Day 3</a>
+            </div>
+            <div class="itinerary-item">
+                <a href="itinerary.html#day4"><img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=400&q=60" alt="Pedra Furada">Day 4</a>
+            </div>
+            <div class="itinerary-item">
+                <a href="itinerary.html#day5"><img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=400&q=60" alt="Dunes">Day 5</a>
+            </div>
+            <div class="itinerary-item">
+                <a href="itinerary.html#day6"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=60" alt="Sunset">Day 6</a>
             </div>
         </div>
-
-        <!-- Day 2 -->
-        <div class="day-content" data-day="2">
-            <div class="day-header">
-                <h2 class="day-title">Day 2: Beach & Water Adventures</h2>
-                <p class="day-theme">Kitesurfing capital of Brazil</p>
-            </div>
-            <div class="activities">
-                <div class="activity">
-                    <div class="activity-time">Morning: 9:00 AM</div>
-                    <div class="activity-title">🪁 Kitesurfing Lesson</div>
-                    <div class="activity-description">
-                        Learn to kitesurf in perfect conditions! Jericoacoara's consistent trade winds and shallow lagoons make it ideal for beginners. Professional instructors available.
-                    </div>
-                    <div class="activity-tip">💡 Tip: Book lessons in advance during peak season. Equipment rental available if you're experienced.</div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Afternoon: 1:00 PM</div>
-                    <div class="activity-title">🏖️ Beach Time & Lunch</div>
-                    <div class="activity-description">
-                        Relax on the pristine main beach. Enjoy açaí bowls, fresh coconut water, and grilled fish at beachside barracas (beach bars).
-                    </div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Late Afternoon: 4:00 PM</div>
-                    <div class="activity-title">⛵ Stand-up Paddleboarding</div>
-                    <div class="activity-description">
-                        Explore the calm waters on a SUP board. Perfect for spotting sea turtles and enjoying the crystal-clear water from a different perspective.
-                    </div>
-                    <div class="activity-tip">💡 Tip: Best conditions are usually in the late afternoon when winds calm down.</div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Evening: 7:00 PM</div>
-                    <div class="activity-title">🎵 Live Music & Forró Dancing</div>
-                    <div class="activity-description">
-                        Experience authentic Brazilian culture with live forró music at local bars. Don't worry if you can't dance - locals love to teach!
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Day 3 -->
-        <div class="day-content" data-day="3">
-            <div class="day-header">
-                <h2 class="day-title">Day 3: Natural Wonders Tour</h2>
-                <p class="day-theme">Lagoons and unique landscapes</p>
-            </div>
-            <div class="activities">
-                <div class="activity">
-                    <div class="activity-time">Early Morning: 8:00 AM</div>
-                    <div class="activity-title">🚙 Buggy Tour to Lagoa Azul</div>
-                    <div class="activity-description">
-                        Full-day buggy adventure to the stunning blue lagoon. The journey includes thrilling rides over sand dunes and through coconut groves.
-                    </div>
-                    <div class="activity-tip">💡 Tip: Bring plenty of water, sunscreen, and a waterproof bag for your belongings.</div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Mid-Morning: 10:30 AM</div>
-                    <div class="activity-title">💙 Swimming in Lagoa Azul</div>
-                    <div class="activity-description">
-                        Swim in the impossibly blue waters of this freshwater lagoon. The contrast between the white sand dunes and blue water is breathtaking.
-                    </div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Afternoon: 2:00 PM</div>
-                    <div class="activity-title">🌴 Visit to Lagoa do Paraíso</div>
-                    <div class="activity-description">
-                        Continue to Paradise Lagoon, famous for its hammocks in the water and floating bars. Relax and enjoy caipirinhas while floating.
-                    </div>
-                    <div class="activity-tip">💡 Tip: This is the perfect Instagram spot! The colorful hammocks create amazing photos.</div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Late Afternoon: 5:00 PM</div>
-                    <div class="activity-title">🪨 Pedra Furada (Perforated Rock)</div>
-                    <div class="activity-description">
-                        Visit Jericoacoara's iconic rock formation with a natural arch carved by wind and sea. Perfect spot for dramatic sunset photos.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Day 4 -->
-        <div class="day-content" data-day="4">
-            <div class="day-header">
-                <h2 class="day-title">Day 4: Adventure & Culture</h2>
-                <p class="day-theme">Horseback riding and local experiences</p>
-            </div>
-            <div class="activities">
-                <div class="activity">
-                    <div class="activity-time">Morning: 8:30 AM</div>
-                    <div class="activity-title">🐎 Horseback Riding on the Beach</div>
-                    <div class="activity-description">
-                        Ride along the endless coastline on well-trained horses. Experience the freedom of galloping on pristine sand with ocean breeze in your hair.
-                    </div>
-                    <div class="activity-tip">💡 Tip: No riding experience necessary. Guides adjust the pace to your comfort level.</div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Late Morning: 11:00 AM</div>
-                    <div class="activity-title">🏛️ Visit to Jijoca de Jericoacoara</div>
-                    <div class="activity-description">
-                        Explore the nearby town to see local life beyond tourism. Visit the market, church, and interact with friendly locals.
-                    </div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Afternoon: 2:00 PM</div>
-                    <div class="activity-title">🍳 Cooking Class</div>
-                    <div class="activity-description">
-                        Learn to prepare traditional Ceará dishes like moqueca de peixe (fish stew) and tapioca. Cook with local ingredients and family recipes.
-                    </div>
-                    <div class="activity-tip">💡 Tip: Many pousadas offer cooking classes, or ask locals for recommendations.</div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Evening: 6:30 PM</div>
-                    <div class="activity-title">🎨 Artisan Workshop Visit</div>
-                    <div class="activity-description">
-                        Meet local artisans creating beautiful crafts from coconut, wood, and sand. Purchase unique souvenirs directly from the makers.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Day 5 -->
-        <div class="day-content" data-day="5">
-            <div class="day-header">
-                <h2 class="day-title">Day 5: Tatajuba & Mangue Seco</h2>
-                <p class="day-theme">Hidden gems and pristine nature</p>
-            </div>
-            <div class="activities">
-                <div class="activity">
-                    <div class="activity-time">Early Morning: 7:30 AM</div>
-                    <div class="activity-title">🚤 Boat Trip to Tatajuba</div>
-                    <div class="activity-description">
-                        Take a boat across the Preá River to reach Tatajuba, a secluded fishing village surrounded by dunes and mangroves.
-                    </div>
-                    <div class="activity-tip">💡 Tip: Bring insect repellent for the mangrove areas and comfortable walking shoes.</div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Morning: 9:00 AM</div>
-                    <div class="activity-title">🌿 Mangrove Exploration</div>
-                    <div class="activity-description">
-                        Discover the rich ecosystem of mangroves by canoe. Spot herons, crabs, and unique plant life in this peaceful environment.
-                    </div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Midday: 12:00 PM</div>
-                    <div class="activity-title">🦐 Fresh Seafood Lunch</div>
-                    <div class="activity-description">
-                        Enjoy the freshest seafood at a local restaurant in Tatajuba. Try the shrimp bobó and grilled fish caught that morning.
-                    </div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Afternoon: 3:00 PM</div>
-                    <div class="activity-title">🏖️ Secluded Beach Time</div>
-                    <div class="activity-description">
-                        Relax on Tatajuba's pristine, nearly empty beaches. Perfect for those seeking solitude and untouched natural beauty.
-                    </div>
-                    <div class="activity-tip">💡 Tip: This is one of the few places where you might have the beach entirely to yourself.</div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Late Afternoon: 5:30 PM</div>
-                    <div class="activity-title">🌅 Return Journey Sunset</div>
-                    <div class="activity-description">
-                        Return to Jericoacoara by boat during golden hour, watching the sunset paint the sky while crossing the river.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Day 6 -->
-        <div class="day-content" data-day="6">
-            <div class="day-header">
-                <h2 class="day-title">Day 6: Farewell & Last Adventures</h2>
-                <p class="day-theme">Final memories in paradise</p>
-            </div>
-            <div class="activities">
-                <div class="activity">
-                    <div class="activity-time">Morning: 9:00 AM</div>
-                    <div class="activity-title">🧘 Sunrise Yoga on the Beach</div>
-                    <div class="activity-description">
-                        Start your final day with peaceful yoga as the sun rises over the Atlantic. Many local instructors offer beachside classes.
-                    </div>
-                    <div class="activity-tip">💡 Tip: Even if you're not experienced in yoga, the peaceful setting makes it worthwhile.</div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Late Morning: 10:30 AM</div>
-                    <div class="activity-title">🛍️ Souvenir Shopping</div>
-                    <div class="activity-description">
-                        Browse local shops for unique handicrafts, colorful hammocks, cashew products, and beautiful jewelry made from local materials.
-                    </div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Afternoon: 1:00 PM</div>
-                    <div class="activity-title">🍽️ Farewell Lunch</div>
-                    <div class="activity-description">
-                        Enjoy one last meal at your favorite restaurant from the week. Many visitors return to their Day 1 sunset spot for a nostalgic final meal.
-                    </div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Late Afternoon: 4:00 PM</div>
-                    <div class="activity-title">📸 Photo Walk</div>
-                    <div class="activity-description">
-                        Take a final stroll through the village, capturing memories of the colorful streets, friendly faces, and stunning landscapes.
-                    </div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Evening: 6:00 PM</div>
-                    <div class="activity-title">🌅 Final Sunset</div>
-                    <div class="activity-description">
-                        Return to Duna do Pôr do Sol for one last magical sunset. Reflect on your amazing week in this special place.
-                    </div>
-                    <div class="activity-tip">💡 Tip: This is the perfect time to plan your return visit - Jericoacoara has a way of calling people back!</div>
-                </div>
-                <div class="activity">
-                    <div class="activity-time">Night: 8:00 PM</div>
-                    <div class="activity-title">🚐 Departure Preparation</div>
-                    <div class="activity-description">
-                        Pack your bags with sandy memories and prepare for your return journey. Most transfers to Fortaleza depart early morning.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>🌊 Safe travels and lifetime memories await in Jericoacoara! 🌊</p>
-            <p><small>Don't forget to try: Fresh coconut water • Açaí na tigela • Caipirinha de cajú • Grilled lobster</small></p>
-        </div>
+        <p style="margin-top:20px;text-align:center;">
+            <a href="itinerary.html">Full Itinerary</a> | <a href="highlights.html">Trip Highlights</a>
+        </p>
     </div>
-
-    <script>
-        const dayButtons = document.querySelectorAll('.day-btn');
-        const dayContents = document.querySelectorAll('.day-content');
-        const progressFill = document.getElementById('progressFill');
-
-        dayButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const day = parseInt(button.getAttribute('data-day'), 10);
-                
-                // Remove active class from all buttons and contents
-                dayButtons.forEach(btn => btn.classList.remove('active'));
-                dayContents.forEach(content => content.classList.remove('active'));
-                
-                // Add active class to clicked button and corresponding content
-                button.classList.add('active');
-                document.querySelector(`[data-day="${day}"].day-content`).classList.add('active');
-                
-                // Update progress bar based on total number of days
-                const progressPercentage = (day / dayButtons.length) * 100;
-                progressFill.style.width = `${progressPercentage.toFixed(2)}%`;
-                
-                // Smooth scroll to top of content
-                document.querySelector('.day-content.active').scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'start' 
-                });
-            });
-        });
-
-        // Add some interactive hover effects
-        document.querySelectorAll('.activity').forEach(activity => {
-            activity.addEventListener('mouseenter', function() {
-                this.style.boxShadow = '0 5px 20px rgba(102, 126, 234, 0.2)';
-            });
-            
-            activity.addEventListener('mouseleave', function() {
-                this.style.boxShadow = 'none';
-            });
-        });
-    </script>
+    <footer>
+        &copy; 2024 Brazil Trip Planner
+    </footer>
 </body>
 </html>
