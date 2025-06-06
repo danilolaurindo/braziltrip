@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brazil 22-Day Adventure</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background: #f5f5f5;
+            color: #222;
+            font-size: 1.1rem;
+        }
+        .skip-link {
+            position: absolute;
+            left: -999px;
+            top: auto;
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            z-index: 100;
+        }
+        .skip-link:focus {
+            left: 10px;
+            top: 10px;
+        }
+        header, footer {
+            text-align: center;
+            padding: 20px;
+            background: #2b6cb0;
+            color: white;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+        .day-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .day-btn {
+            background: #e0e0e0;
+            color: #333;
+            border: 2px solid #bbb;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .day-btn:hover,
+        .day-btn:focus {
+            background: #d0d0d0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            outline: none;
+        }
+        .day-btn.active {
+            background: #2b6cb0;
+            color: white;
+            border-color: #2b6cb0;
+        }
+        .day-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+        .day-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .day-header {
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .day-title {
+            font-size: 1.6rem;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: white;
+            opacity: 0.8;
+        }
+        .progress-bar {
+            background: #e0e0e0;
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: #2b6cb0;
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <header>
+        <h1>Brazil 22-Day Adventure</h1>
+        <p>An extended journey exploring Brazil's highlights</p>
+    </header>
+    <main id="main" class="container">
+        <div class="day-selector">
+            <button class="day-btn active" data-day="1" aria-pressed="true" aria-label="View day 1 itinerary">Day 1</button>
+            <button class="day-btn" data-day="2" aria-pressed="false" aria-label="View day 2 itinerary">Day 2</button>
+            <button class="day-btn" data-day="3" aria-pressed="false" aria-label="View day 3 itinerary">Day 3</button>
+            <button class="day-btn" data-day="4" aria-pressed="false" aria-label="View day 4 itinerary">Day 4</button>
+            <button class="day-btn" data-day="5" aria-pressed="false" aria-label="View day 5 itinerary">Day 5</button>
+            <button class="day-btn" data-day="6" aria-pressed="false" aria-label="View day 6 itinerary">Day 6</button>
+            <button class="day-btn" data-day="7" aria-pressed="false" aria-label="View day 7 itinerary">Day 7</button>
+            <button class="day-btn" data-day="8" aria-pressed="false" aria-label="View day 8 itinerary">Day 8</button>
+            <button class="day-btn" data-day="9" aria-pressed="false" aria-label="View day 9 itinerary">Day 9</button>
+            <button class="day-btn" data-day="10" aria-pressed="false" aria-label="View day 10 itinerary">Day 10</button>
+            <button class="day-btn" data-day="11" aria-pressed="false" aria-label="View day 11 itinerary">Day 11</button>
+            <button class="day-btn" data-day="12" aria-pressed="false" aria-label="View day 12 itinerary">Day 12</button>
+            <button class="day-btn" data-day="13" aria-pressed="false" aria-label="View day 13 itinerary">Day 13</button>
+            <button class="day-btn" data-day="14" aria-pressed="false" aria-label="View day 14 itinerary">Day 14</button>
+            <button class="day-btn" data-day="15" aria-pressed="false" aria-label="View day 15 itinerary">Day 15</button>
+            <button class="day-btn" data-day="16" aria-pressed="false" aria-label="View day 16 itinerary">Day 16</button>
+            <button class="day-btn" data-day="17" aria-pressed="false" aria-label="View day 17 itinerary">Day 17</button>
+            <button class="day-btn" data-day="18" aria-pressed="false" aria-label="View day 18 itinerary">Day 18</button>
+            <button class="day-btn" data-day="19" aria-pressed="false" aria-label="View day 19 itinerary">Day 19</button>
+            <button class="day-btn" data-day="20" aria-pressed="false" aria-label="View day 20 itinerary">Day 20</button>
+            <button class="day-btn" data-day="21" aria-pressed="false" aria-label="View day 21 itinerary">Day 21</button>
+            <button class="day-btn" data-day="22" aria-pressed="false" aria-label="View day 22 itinerary">Day 22</button>
+        </div>
+
+        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="4.55">
+            <div class="progress-fill" id="progressFill" style="width: 4.55%;"></div>
+        </div>
+
+<div id="day1" class="day-content active" data-day="1">
+    <div class="day-header">
+        <h2 class="day-title">Day 1: Dec 12 – Depart from Helsinki</h2>
+    </div>
+    <ul>
+        <li>Check in early at HEL Airport and enjoy a hearty breakfast.</li>
+        <li>Browse duty-free shops for last-minute travel goodies.</li>
+        <li>Settle in for the overnight flight to São Paulo.</li>
+    </ul>
+</div>
+
+<div id="day2" class="day-content" data-day="2">
+    <div class="day-header">
+        <h2 class="day-title">Day 2: Dec 13 – Exploring São Paulo</h2>
+    </div>
+    <ul>
+        <li>Walk the vibrant Avenida Paulista and visit cultural centers.</li>
+        <li>Relax in Ibirapuera Park’s green spaces and museums.</li>
+        <li>Sample exotic fruits at the Municipal Market for lunch.</li>
+    </ul>
+</div>
+
+<div id="day3" class="day-content" data-day="3">
+    <div class="day-header">
+        <h2 class="day-title">Day 3: Dec 14 – More of São Paulo</h2>
+    </div>
+    <ul>
+        <li>Visit the São Paulo Museum of Art (MASP) on Paulista.</li>
+        <li>Stroll around the historic Sé Cathedral and downtown squares.</li>
+        <li>Experience São Paulo’s nightlife in Vila Madalena.</li>
+    </ul>
+</div>
+
+<div id="day4" class="day-content" data-day="4">
+    <div class="day-header">
+        <h2 class="day-title">Day 4: Dec 15 – Last Day in São Paulo</h2>
+    </div>
+    <ul>
+        <li>Explore the Japanese district of Liberdade for lunch and shopping.</li>
+        <li>Admire street art in Beco do Batman alley.</li>
+        <li>Sip rich Brazilian coffee at a specialty café.</li>
+    </ul>
+</div>
+
+<div id="day5" class="day-content" data-day="5">
+    <div class="day-header">
+        <h2 class="day-title">Day 5: Dec 16 – Fly to Manaus</h2>
+    </div>
+    <ul>
+        <li>Catch a morning flight from São Paulo to Manaus.</li>
+        <li>Visit the ornate Amazon Theatre downtown.</li>
+        <li>Dine on fresh tambaqui fish at a local market.</li>
+    </ul>
+</div>
+
+<div id="day6" class="day-content" data-day="6">
+    <div class="day-header">
+        <h2 class="day-title">Day 6: Dec 17 – Into the Amazon</h2>
+    </div>
+    <ul>
+        <li>Head out on a guided jungle hike to learn about native flora.</li>
+        <li>Take a boat tour to spot wildlife along the Amazon River.</li>
+        <li>Try piranha fishing or caiman spotting after dark.</li>
+    </ul>
+</div>
+
+<div id="day7" class="day-content" data-day="7">
+    <div class="day-header">
+        <h2 class="day-title">Day 7: Dec 18 – Amazon Exploration</h2>
+    </div>
+    <ul>
+        <li>Visit an indigenous community to learn about local traditions.</li>
+        <li>Paddle a canoe through flooded forests and narrow creeks.</li>
+        <li>Witness the Meeting of the Waters near Manaus.</li>
+    </ul>
+</div>
+
+<div id="day8" class="day-content" data-day="8">
+    <div class="day-header">
+        <h2 class="day-title">Day 8: Dec 19 – Amazon Adventures</h2>
+    </div>
+    <ul>
+        <li>Go birdwatching at sunrise with a local guide.</li>
+        <li>Learn jungle survival skills using medicinal plants.</li>
+        <li>Take a refreshing swim beneath a jungle waterfall.</li>
+    </ul>
+</div>
+
+<div id="day9" class="day-content" data-day="9">
+    <div class="day-header">
+        <h2 class="day-title">Day 9: Dec 20 – Last Day in the Jungle</h2>
+    </div>
+    <ul>
+        <li>Walk a canopy trail or try a zip line adventure.</li>
+        <li>Search for pink river dolphins on a river excursion.</li>
+        <li>Relax at your jungle lodge and share stories around a fire.</li>
+    </ul>
+</div>
+
+<div id="day10" class="day-content" data-day="10">
+    <div class="day-header">
+        <h2 class="day-title">Day 10: Dec 21 – Travel to Fortaleza</h2>
+    </div>
+    <ul>
+        <li>Fly from Manaus to sunny Fortaleza on the coast.</li>
+        <li>Take an evening stroll along lively Beira-Mar Avenue.</li>
+        <li>Feast on fresh seafood at the beachfront fish market.</li>
+    </ul>
+</div>
+
+<div id="day11" class="day-content" data-day="11">
+    <div class="day-header">
+        <h2 class="day-title">Day 11: Dec 22 – Beach Life Begins</h2>
+    </div>
+    <ul>
+        <li>Relax on Fortaleza’s famous Praia do Futuro.</li>
+        <li>Try kitesurfing or paddleboarding in the warm waters.</li>
+        <li>Dance to live forró music at night.</li>
+    </ul>
+</div>
+
+<div id="day12" class="day-content" data-day="12">
+    <div class="day-header">
+        <h2 class="day-title">Day 12: Dec 23 – More Beach Time</h2>
+    </div>
+    <ul>
+        <li>Take a day trip to Cumbuco for sand dunes and buggy rides.</li>
+        <li>Sip coconut water under a beach umbrella.</li>
+        <li>Visit the Dragão do Mar cultural center in the evening.</li>
+    </ul>
+</div>
+
+<div id="day13" class="day-content" data-day="13">
+    <div class="day-header">
+        <h2 class="day-title">Day 13: Dec 24 – Coastal Explorations</h2>
+    </div>
+    <ul>
+        <li>Head out to Canoa Quebrada for dramatic red cliffs.</li>
+        <li>Try horseback riding along the shoreline.</li>
+        <li>Watch the sunset from the dunes with a cold drink.</li>
+    </ul>
+</div>
+
+<div id="day14" class="day-content" data-day="14">
+    <div class="day-header">
+        <h2 class="day-title">Day 14: Dec 25 – Christmas on the Beach</h2>
+    </div>
+    <ul>
+        <li>Spend the morning relaxing at Lagoinha Beach.</li>
+        <li>Take a short boat ride to nearby lagoons.</li>
+        <li>Enjoy a festive dinner of seafood and local treats.</li>
+    </ul>
+</div>
+
+<div id="day15" class="day-content" data-day="15">
+    <div class="day-header">
+        <h2 class="day-title">Day 15: Dec 26 – Sun and Surf</h2>
+    </div>
+    <ul>
+        <li>Snorkel around the reefs of nearby beaches.</li>
+        <li>Enjoy a fresh seafood lunch right on the sand.</li>
+        <li>Watch a capoeira performance at sunset.</li>
+    </ul>
+</div>
+
+<div id="day16" class="day-content" data-day="16">
+    <div class="day-header">
+        <h2 class="day-title">Day 16: Dec 27 – Final Day on the Coast</h2>
+    </div>
+    <ul>
+        <li>Start the morning with relaxing yoga on the beach.</li>
+        <li>Shop for local crafts and souvenirs at a beach market.</li>
+        <li>Sail at sunset for stunning coastal views.</li>
+    </ul>
+</div>
+
+<div id="day17" class="day-content" data-day="17">
+    <div class="day-header">
+        <h2 class="day-title">Day 17: Dec 28 – Return to São Paulo</h2>
+    </div>
+    <ul>
+        <li>Fly back to São Paulo from Fortaleza.</li>
+        <li>Explore colorful street art in Vila Madalena.</li>
+        <li>Enjoy dinner at a classic Brazilian churrascaria.</li>
+    </ul>
+</div>
+
+<div id="day18" class="day-content" data-day="18">
+    <div class="day-header">
+        <h2 class="day-title">Day 18: Dec 29 – Art & Nature in SP</h2>
+    </div>
+    <ul>
+        <li>Visit the Pinacoteca de São Paulo art museum.</li>
+        <li>Take a walk in Horto Florestal park on the city’s edge.</li>
+        <li>Taste artisanal coffee at the famous Coffee Lab.</li>
+    </ul>
+</div>
+
+<div id="day19" class="day-content" data-day="19">
+    <div class="day-header">
+        <h2 class="day-title">Day 19: Dec 30 – Markets and Street Art</h2>
+    </div>
+    <ul>
+        <li>Grab a famous mortadella sandwich at the Municipal Market.</li>
+        <li>Tour vibrant street murals around Beco do Batman.</li>
+        <li>Take in city views from the top of Edifício Copan.</li>
+    </ul>
+</div>
+
+<div id="day20" class="day-content" data-day="20">
+    <div class="day-header">
+        <h2 class="day-title">Day 20: Dec 31 – New Year’s Eve in SP</h2>
+    </div>
+    <ul>
+        <li>Take a day trip to the artsy town of Embu das Artes.</li>
+        <li>Learn about Brazil’s passion at the Football Museum.</li>
+        <li>Celebrate New Year’s Eve with fireworks on Avenida Paulista.</li>
+    </ul>
+</div>
+
+<div id="day21" class="day-content" data-day="21">
+    <div class="day-header">
+        <h2 class="day-title">Day 21: Jan 1 – Discover More of SP</h2>
+    </div>
+    <ul>
+        <li>Stroll through Parque da Independência and museum.</li>
+        <li>Shop on stylish Oscar Freire Street for souvenirs.</li>
+        <li>Enjoy a farewell dinner in a traditional restaurant.</li>
+    </ul>
+</div>
+
+<div id="day22" class="day-content" data-day="22">
+    <div class="day-header">
+        <h2 class="day-title">Day 22: Jan 2 – Depart from GRU</h2>
+    </div>
+    <ul>
+        <li>Pack your bags and check out of the hotel.</li>
+        <li>Head to Guarulhos International Airport for the flight home.</li>
+        <li>Look back on the amazing adventures of Brazil.</li>
+    </ul>
+</div>
+
+        <footer class="footer">
+            <p>Enjoy your extended stay in Brazil!</p>
+        </footer>
+    </main>
+
+    <script>
+        const dayButtons = document.querySelectorAll('.day-btn');
+        const dayContents = document.querySelectorAll('.day-content');
+        const progressFill = document.getElementById('progressFill');
+
+        dayButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const day = parseInt(button.getAttribute('data-day'), 10);
+                dayButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-pressed', 'false');
+                });
+                dayContents.forEach(content => content.classList.remove('active'));
+
+                button.classList.add('active');
+                button.setAttribute('aria-pressed', 'true');
+                document.querySelector(`[data-day="${day}"]`).classList.add('active');
+
+                const progressPercentage = (day / dayButtons.length) * 100;
+                progressFill.style.width = `${progressPercentage.toFixed(2)}%`;
+                document.querySelector('.progress-bar').setAttribute('aria-valuenow', progressPercentage.toFixed(2));
+
+                document.querySelector('.day-content.active').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
